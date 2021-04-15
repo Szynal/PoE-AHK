@@ -1,10 +1,10 @@
-IniRead, Start, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Start
-IniRead, Stop, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Stop
-IniRead, Currency, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Currency
-IniRead, Proph, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Proph
-IniRead, Decks, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Decks
-IniRead, Inv, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Inv
-IniRead, End, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, End
+IniRead, Start, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Start
+IniRead, Stop, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Stop
+IniRead, Currency, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Currency
+IniRead, Proph, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Proph
+IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
+IniRead, Inv, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Inv
+IniRead, End, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, End
 
 Gui, -MaximizeBox -MinimizeBox
 Gui, Add, Text, x12 y19 w130 h30 , Start Flasks
@@ -19,7 +19,7 @@ Gui, Add, Hotkey, x152 y19 w180 h30 vStart, %Start%
 Gui, Add, Hotkey, x152 y59 w180 h30 vStop, %Stop%
 Gui, Add, Hotkey, x152 y99 w180 h30 vCurrency, %Currency%
 Gui, Add, Hotkey, x152 y139 w180 h30 vProph, %Proph%
-Gui, Add, Hotkey, x152 y179 w180 h30 vDecks, %Decks%
+Gui, Add, Hotkey, x152 y179 w180 h30 vGuiToggle, %GuiToggle%
 Gui, Add, Hotkey, x152 y219 w180 h30 vInv, %Inv%
 Gui, Add, Edit, x152 y259 w180 h30 -VScroll +ReadOnly vSpam, SHIFT+Pause/break
 Gui, Add, Hotkey, x152 y299 w180 h30 vEnd, %End%
@@ -37,23 +37,23 @@ Save:
 	GuiControlGet, Stop
 	GuiControlGet, Currency
 	GuiControlGet, Proph
-	GuiControlGet, Decks
+	GuiControlGet, GuiToggle
 	GuiControlGet, Inv
 	GuiControlGet, Spam
 	start := Start
 	stop := Stop
 	currency := Currency
 	proph := Proph
-	decks := Decks
+	decks := GuiToggle
 	inv := Inv
 	spam := Spam
-	IniWrite, %start%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Start
-	IniWrite, %stop%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Stop
-	IniWrite, %currency%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Currency
-	IniWrite, %proph%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Proph
-	IniWrite, %decks%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Decks
-	IniWrite, %inv%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, Inv
-	IniWrite, %end%, %A_ScriptDir%\timers\Hotkeys.ini, Hotkeys, End
+	IniWrite, %start%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Start
+	IniWrite, %stop%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Stop
+	IniWrite, %currency%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Currency
+	IniWrite, %proph%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Proph
+	IniWrite, %decks%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
+	IniWrite, %inv%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Inv
+	IniWrite, %end%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, End
 	ExitApp
 
 Cancel:
