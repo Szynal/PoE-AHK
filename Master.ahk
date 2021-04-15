@@ -17,14 +17,14 @@ IniRead, Start, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Start
 IniRead, Stop, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Stop
 IniRead, Currency, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Currency
 IniRead, Proph, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Proph
-IniRead, Decks, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Decks
+IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
 IniRead, Inv, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Inv
 IniRead, End, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, End
 
 ;___________________Hotkey_____________________
 Hotkey,%Start%,StartHK
 Hotkey,%Stop%,StopHK
-Hotkey,%Decks%,DecksHK
+Hotkey,%GuiToggle%,GuiToggleHK
 Hotkey,%End%,EndHK
 
 ;________________ Set ahk icon______________
@@ -32,8 +32,9 @@ I_Icon = %A_ScriptDir%\data\icon.ico
 IfExist, %I_Icon%
 Menu, Tray, Icon, %I_Icon%
 
-
 ;___________________GUI________________________
+
+guiToggle:= false
 
 ;__________________Background__________________
 I_Background_01 = %A_ScriptDir%\data\bd_01.png
@@ -45,7 +46,6 @@ Gui,Add,Picture,x465 y10 w176 h235,C:\Users\szyna\Documents\AHK\AHK-Studio\Proje
 
 ;__________________Font_____________________
 Gui, Font, cWhite Bold s8
-
 Gui,Add,Text,x20 y20 w220 h70 BackgroundTrans,Flask
 Gui,Add,Button,x30 y40 w40 h40 gFlask1,1
 Gui,Add,Button,x70 y40 w40 h40 gFlask2,2
@@ -135,7 +135,7 @@ Spam:
 Help:
 	if (switch = false) {
 		switch := true
-		ToolTip, %Start% = Start Flasks`n%Stop% = Stop Flasks`n%Currency% = Right click a currency and then press F7 to use that currency on all items inside inventory`n%Proph% = Buy prophecies (leave out bottom right for this)`n%Decks% = Open Stacked decks in first row`n%Inv% = Throws all items from your inventory to the ground`n%End% = Abrubtly ends script`nCtrl + Numpadx = Moves x column Inventory to stash`nCtrl + Numpad0 = Moves all Inventory to stash`nCtrl + Numpad+ = Moves all Inventory to stash VERY FAST (do not use for trades!!!)`n, 100, 150
+		ToolTip, %Start% = Start Flasks`n%Stop% = Stop Flasks`n%Currency% = Right click a currency and then press F7 to use that currency on all items inside inventory`n%Proph% = Buy prophecies (leave out bottom right for this)`n%GuiToggle% = Open Stacked decks in first row`n%Inv% = Throws all items from your inventory to the ground`n%End% = Abrubtly ends script`nCtrl + Numpadx = Moves x column Inventory to stash`nCtrl + Numpad0 = Moves all Inventory to stash`nCtrl + Numpad+ = Moves all Inventory to stash VERY FAST (do not use for trades!!!)`n, 100, 150
 	} else {
 		switch := false
 		RemoveToolTip:
@@ -182,8 +182,14 @@ StopHK:
 	stopFlasks()
 	return
 
-DecksHK:
-	MsgBox You pressed No.
+GuiToggleHK:
+	if (guiToggle = false){
+		Gui, Hide
+		guiToggle := true
+	} else {
+		Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 400 " w" 650 " h" 250, PoE-AHK v1.1
+		guiToggle := false
+	}
 	return
 
 EndHK:
