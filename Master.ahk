@@ -13,19 +13,20 @@ global mapFound = false
 global coorY
 global coorX
 
-IniRead, Start, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Start
-IniRead, Stop, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Stop
-IniRead, Currency, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Currency
-IniRead, Proph, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Proph
+
+; IniRead, Start, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Start
+; IniRead, Stop, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Stop
+; IniRead, Currency, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Currency
+; IniRead, Proph, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Proph
 IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
-IniRead, Inv, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Inv
-IniRead, End, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, End
+; IniRead, Inv, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Inv
+; IniRead, End, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, End
 
 ;___________________Hotkey_____________________
-Hotkey,%Start%,StartHK
-Hotkey,%Stop%,StopHK
+; Hotkey,%Start%,StartHK
+; Hotkey,%Stop%,StopHK
 Hotkey,%GuiToggle%,GuiToggleHK
-Hotkey,%End%,EndHK
+; Hotkey,%End%,EndHK
 
 ;________________ Set ahk icon______________
 I_Icon = %A_ScriptDir%\data\icon.ico
@@ -61,19 +62,21 @@ Gui,Add,Button,x150 y110 w40 h40 gSkillR,R
 Gui,Add,Button,x190 y110 w40 h40 gSkillT,T
 
 Gui,Add,Text,x270 y30 w60 h30 BackgroundTrans,Start Flask:
-
 Gui,Add,Hotkey,x340 y30 w120 h21,Hotkeys
-Gui,Add,Text,x270 y60 w21 h13 BackgroundTrans,Text
-Gui,Add,Hotkey,x340 y60 w120 h21,Hotkey
 
-Gui,Add,Text,x270 y90 w21 h13 BackgroundTrans,Text Red
+
+Gui,Add,Text,x270 y60 w100 h13 BackgroundTrans,Open/Hide GUI
+IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
+Gui, Add, Hotkey,x400 y60 w60 h20 vGuiToggle, %GuiToggle%
+
+
 Gui,Add,Button,x20 y170 w50 h30 gHelp,Help
 
 Gui, Font, cBlack  
 Gui,Add,Edit,x80 y170 w150 h30 -VScroll +ReadOnly vLogs, Sleeping...
 Gui, Font, cWhite Bold 
 
-Gui,Add,Button,x250 y170 w50 h30 vHK gHK,HK
+Gui,Add,Button,x250 y170 w50 h30 vHK gSave,Save
 
 Gui,Add,Text,x60 y210 w150 h13 BackgroundTrans ,Created by Pawel Szynal
 Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 400 " w" 650 " h" 250, PoE-AHK v1.1
@@ -135,8 +138,8 @@ Spam:
 Help:
 	if (switch = false) {
 		switch := true
-		ToolTip, %Start% = Start Flasks`n%Stop% = Stop Flasks`n%Currency% = Right click a currency and then press F7 to use that currency on all items inside inventory`n%Proph% = Buy prophecies (leave out bottom right for this)`n%GuiToggle% = Open Stacked decks in first row`n%Inv% = Throws all items from your inventory to the ground`n%End% = Abrubtly ends script`nCtrl + Numpadx = Moves x column Inventory to stash`nCtrl + Numpad0 = Moves all Inventory to stash`nCtrl + Numpad+ = Moves all Inventory to stash VERY FAST (do not use for trades!!!)`n, 100, 150
-	} else {
+		ToolTip, TEST
+		} else {
 		switch := false
 		RemoveToolTip:
 		ToolTip
@@ -341,3 +344,10 @@ EndHK:
 		}
 	}
 
+	Save:
+	Gui, Submit, NoHide
+	GuiControlGet, GuiToggle
+	decks := GuiToggle
+	IniWrite, %decks%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
+	MsgBox The new settings have been saved. Remember to restart the program.
+	return
