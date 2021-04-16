@@ -8,6 +8,7 @@ The project contains a ahk script written by me. The program supports Path of Ex
 Project is under development!! 
 Some of the functionalities have been hacked and require intervention in the program code. In my spare time I will try to develop this script
 
+Program is used for educational purposes and I don't recommend using script for cheating.
 
 ## Preview Images:
 
