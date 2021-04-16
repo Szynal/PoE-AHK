@@ -11,7 +11,7 @@ Some of the functionalities have been hacked and require intervention in the pro
 
 ## Preview Images:
 
-![Screenshot](screenshots/screenshot_v1.1.png?raw=true "Preview welcome screen")screa
+![Screenshot](screenshots/screenshot_v1.1.png?raw=true "Preview")
 
 ## Functionalities;
 
