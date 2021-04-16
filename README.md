@@ -1,9 +1,15 @@
  #   <img src="https://www.pngitem.com/pimgs/m/474-4742975_path-of-exile-logo-path-of-exile-icon.png" alt="" data-canonical-src="https://www.pngitem.com/pimgs/m/474-4742975_path-of-exile-logo-path-of-exile-icon.png" width="80" height="60" />  PoE-AHK
  
  
-## Introduction
+## Overview:
 
-TODO
+The project contains a ahk script written by me. The program supports Path of Exile player's. Path of Exile is a free-to-play action role-playing video game developed and published by Grinding Gear Games. 
+
+The project was created for educational purposes and it is not recommended to use it for other purposes.
+
+## Preview Images:
+
+![Screenshot](screenshots/screenshot_v1.1.png?raw=true "Preview welcome screen")screa
 
 ## What is NeverSink-Filter
 
