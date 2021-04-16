@@ -15,8 +15,8 @@ Some of the functionalities have been hacked and require intervention in the pro
 
 ## Functionalities;
 
-TSP Logout under hotkey (Very Quick)
-Auto Logout (Skanowanie skryptów koloru pikseli hp, jeśli kolor został zmieniony. Skrypt loguje odtwarzacz.. )
+ * TSP Logout under hotkey (Very Quick)
+ * Auto Logout (Script scan of hp pixel color, if it color has been changed script logins player.)
 
 ## What is NeverSink-Filter
 
