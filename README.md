@@ -5,11 +5,18 @@
 
 The project contains a ahk script written by me. The program supports Path of Exile player's. Path of Exile is a free-to-play action role-playing video game developed and published by Grinding Gear Games. 
 
-The project was created for educational purposes and it is not recommended to use it for other purposes.
+Project is under development!! 
+Some of the functionalities have been hacked and require intervention in the program code. In my spare time I will try to develop this script
+
 
 ## Preview Images:
 
 ![Screenshot](screenshots/screenshot_v1.1.png?raw=true "Preview welcome screen")screa
+
+## Functionalities;
+
+TSP Logout under hotkey (Very Quick)
+Auto Logout (Skanowanie skryptów koloru pikseli hp, jeśli kolor został zmieniony. Skrypt loguje odtwarzacz.. )
 
 ## What is NeverSink-Filter
 
