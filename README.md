@@ -19,6 +19,9 @@ Some of the functionalities have been hacked and require intervention in the pro
  * Auto Logout (Script scan of hp pixel color, if it color has been changed script logins player.)
  * Auto flask/skills
 
+
+## Below are the recommended plugins for the game:
+
 ## What is NeverSink-Filter
 
 This is a best lootfilter for the game Path of Exile. It hides low value items, uses a markup-scheme and sounds to highlight expensive gear and is based on economy data mining.
