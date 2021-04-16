@@ -27,6 +27,9 @@ Some of the functionalities have been hacked and require intervention in the pro
 
 This is a best lootfilter for the game Path of Exile. It hides low value items, uses a markup-scheme and sounds to highlight expensive gear and is based on economy data mining.
 
+ * [NeverSink-Filter](https://github.com/NeverSinkDev/NeverSink-Filter/releases) 
+
+
 ## What is Awakened PoE Trade
 
 The best Path of Exile trading app for price checking
