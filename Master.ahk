@@ -66,7 +66,7 @@ IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
 IniRead, Logout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Logout
 
 ;___________________Init Hotkey_____________________
-Hotkey,%GuiToggle%,GuiToggleHK
+Hotkey,%GuiToggle%,winToggle
 Hotkey,%Logout%,logoutCommand
 
 ;________________ Set ahk icon______________
@@ -224,15 +224,10 @@ StopHK:
 	stopFlasks()
 	return
 
-GuiToggleHK:
-	if (guiToggle = false){
-		Gui, Hide
-		guiToggle := true
-	} else {
+winToggle:
 		Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 400 " w" 650 " h" 250, PoE-AHK v1.1
 		guiToggle := false
-	}
-	return
+		return
 
 EndHK:
 	autoToggle := false
@@ -341,6 +336,35 @@ EndHK:
 		}
 	}
 	}
+
+f1::
+	msgbox, Start scan hp at 119x, 976y							
+	loop										
+		{
+			PixelGetColor, Color, 119, 976			
+			if (Color == 0x1D198E)					
+				{
+					sleep, 700	 ;sleeps for 1 second TODO -> RAND do 0.1 to 0.3 ms
+					continue						
+				}
+			else
+				{
+					Critical
+						logoutCommand()
+					return				
+				}
+		}					
+	return									
+
+
+f2::
+	MouseGetPos, MouseX, MouseY 
+	PixelGetColor, color, %MouseX%, %MouseY%
+	MsgBox The color at the current cursor position in %MouseX%, %MouseY% is %color%.
+return	
+
+
+
 	
 	stopFlasks() {
 		toggle := false
