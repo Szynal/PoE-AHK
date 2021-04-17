@@ -50,7 +50,10 @@ preloadCportsCall := "cports.exe /stext TEMP"
 
 global toggle = false
 global switch = false
+
 global autoToggle = false
+global autologoutToggle = false
+
 global deckCount
 global chanceCount
 global prophCount
@@ -64,10 +67,12 @@ global coorX
 ;___________________Get Hotkey value from file _____________________
 IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
 IniRead, Logout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Logout
+IniRead, AutoLogout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, AutoLogout
 
 ;___________________Init Hotkey_____________________
 Hotkey,%GuiToggle%,winToggle
 Hotkey,%Logout%,logoutCommand
+Hotkey,%AutoLogout%,autoLogout
 
 ;________________ Set ahk icon______________
 I_Icon = %A_ScriptDir%\data\icon.ico
@@ -106,15 +111,20 @@ Gui,Add,Button,x190 y110 w40 h40 gSkillT,T
 Gui,Add,Text,x250 y30 w60 h30 BackgroundTrans,Start Flask:
 Gui,Add,Hotkey,x340 y30 w120 h21,Hotkeys
 
-
+;__________________GUI-GuiToggle_____________________
 Gui,Add,Text,x250 y60 w100 h13 BackgroundTrans,Open/Hide GUI
 IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
 Gui, Add, Hotkey,x350 y60 w60 h20 vGuiToggle, %GuiToggle%
 
-
+;__________________GUI-Logout_____________________
 Gui,Add,Text,x250 y90 w100 h13 BackgroundTrans, Logout:
 IniRead, Logout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Logout
 Gui,Add, Hotkey, x350 y90 w60 h21 vguiLogout , %Logout%
+
+;__________________GUI-AutoLogout_____________________
+Gui,Add,Text,x250 y120 w100 h13 BackgroundTrans, AutoLogout:
+IniRead, AutoLogout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, AutoLogout
+Gui,Add, Hotkey, x350 y120 w60 h21 vautoLogout , %AutoLogout%
 
 Gui,Add,Button,x20 y170 w50 h30 gHelp,Help
 
@@ -333,28 +343,36 @@ EndHK:
 				Send, 5
 				Sleep, %timer%
 			}
-		}
+		}		
 	}
 	}
 
-f1::
-	msgbox, Start scan hp at 119x, 976y							
-	loop										
-		{
-			PixelGetColor, Color, 119, 976			
-			if (Color == 0x1D198E)					
-				{
-					sleep, 700	 ;sleeps for 1 second TODO -> RAND do 0.1 to 0.3 ms
-					continue						
-				}
-			else
-				{
-					Critical
-						logoutCommand()
-					return				
-				}
-		}					
-	return									
+
+autoLogout:
+		autologoutToggle := !autologoutToggle
+		
+		if (autologoutToggle == true){
+				msgbox, AutoLogout run
+		}
+
+		while (	autologoutToggle == true)										
+			{
+				PixelGetColor, Color, 104, 984			
+				if (Color == 0x1B1586)					
+					{
+						Random, rand, 100, 200
+						sleep, %rand%	
+						continue						
+					}
+				else
+					{
+						Critical
+							logoutCommand()
+						return				
+					}
+			}	
+		msgbox, AutoLogout = false 
+return									
 
 
 f2::
@@ -363,7 +381,17 @@ f2::
 	MsgBox The color at the current cursor position in %MouseX%, %MouseY% is %color%.
 return	
 
-
+q::
+	if (WinActive("ahk_class POEWindowClass")) {
+		Send {r}
+		Random, rand, 200, 500
+		Sleep %rand%
+		Send, ^w
+		Sleep %rand%
+		Send {MButton}
+		Send, ^q
+	}	
+return	
 
 	
 	stopFlasks() {
