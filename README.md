@@ -1,13 +1,35 @@
  #   <img src="https://www.pngitem.com/pimgs/m/474-4742975_path-of-exile-logo-path-of-exile-icon.png" alt="" data-canonical-src="https://www.pngitem.com/pimgs/m/474-4742975_path-of-exile-logo-path-of-exile-icon.png" width="80" height="60" />  PoE-AHK
  
  
-## Introduction
+## Overview:
 
-TODO
+The project contains a ahk script written by me. The program supports Path of Exile player's. Path of Exile is a free-to-play action role-playing video game developed and published by Grinding Gear Games. 
+
+Project is under development!! 
+Some of the functionalities have been hacked and require intervention in the program code. In my spare time I will try to develop this script
+
+Program is used for educational purposes and I don't recommend using script for cheating.
+
+## Preview Images:
+
+![Screenshot](screenshots/screenshot_v1.1.png?raw=true "Preview")
+
+## Functionalities;
+
+ * TSP Logout under hotkey (Very Quick)
+ * Auto Logout (Script scan of hp pixel color, if it color has been changed script logins player.)
+ * Auto flask/skills
+ * Save settings
+
+
+## Below are the recommended plugins for the game:
 
 ## What is NeverSink-Filter
 
 This is a best lootfilter for the game Path of Exile. It hides low value items, uses a markup-scheme and sounds to highlight expensive gear and is based on economy data mining.
+
+ * [NeverSink-Filter](https://github.com/NeverSinkDev/NeverSink-Filter/releases) 
+
 
 ## What is Awakened PoE Trade
 
