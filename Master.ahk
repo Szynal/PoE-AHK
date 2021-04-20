@@ -53,6 +53,7 @@ global switch = false
 
 global autoToggle = false
 global autologoutToggle = false
+global autoSteelSkin = false
 
 global deckCount
 global chanceCount
@@ -68,11 +69,14 @@ global coorX
 IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
 IniRead, Logout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Logout
 IniRead, AutoLogout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, AutoLogout
+IniRead, SteelSkin, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, SteelSkin
 
 ;___________________Init Hotkey_____________________
 Hotkey,%GuiToggle%,winToggle
 Hotkey,%Logout%,logoutCommand
 Hotkey,%AutoLogout%,autoLogout
+Hotkey,%SteelSkin%,steelSkin
+
 
 ;________________ Set ahk icon______________
 I_Icon = %A_ScriptDir%\data\icon.ico
@@ -126,6 +130,11 @@ Gui,Add,Text,x250 y120 w100 h13 BackgroundTrans, AutoLogout:
 IniRead, AutoLogout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, AutoLogout
 Gui,Add, Hotkey, x350 y120 w60 h21 vautoLogout , %AutoLogout%
 
+;__________________GUI-AutoSteelSkin_____________________
+Gui,Add,Text,x250 y150 w100 h13 BackgroundTrans, SteelSkin:
+IniRead, SteelSkin, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, SteelSkin
+Gui,Add, Hotkey, x350 y150 w60 h21 vsteelSkin , %SteelSkin%
+
 Gui,Add,Button,x20 y170 w50 h30 gHelp,Help
 
 Gui, Font, cBlack  
@@ -142,9 +151,6 @@ Gui,Add, Checkbox, x380 y210 w13 h13 Checked%steam%
 Gui,Add, Checkbox, x380 y230 w13 h13 Checked%highBits%
 
 Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 400 " w" 650 " h" 250, PoE-AHK v1.1
-
-; Gui, Add, Edit, x53 y0 w69 h20 -VScroll vFlasks,
-; Gui, Add, Edit, x53 y20 w69 h20 -VScroll vTimer,s
 
 return
 
@@ -231,6 +237,7 @@ StartHK:
 	return
 	
 StopHK:
+	autoSteelSkin := false
 	stopFlasks()
 	return
 
@@ -244,7 +251,7 @@ EndHK:
 	chanceCount := 0
 	deckCount := 0
 	coorCount := 0
-	return
+return
 	
 	runFlasks() {
 		if (WinActive("ahk_class POEWindowClass")) {
@@ -348,6 +355,17 @@ EndHK:
 	}
 
 
+steelSkin:
+	autoSteelSkin := !autoSteelSkin
+	msgbox, steelSkin =  %autoSteelSkin%
+	while (autoSteelSkin)	{
+		Send, e
+		Random, rand, 5001, 5021e
+		sleep, %rand%
+	}
+msgbox, steelSkin = %autoSteelSkin%  
+return	
+
 autoLogout:
 		autologoutToggle := !autologoutToggle
 		
@@ -381,21 +399,20 @@ f2::
 	MsgBox The color at the current cursor position in %MouseX%, %MouseY% is %color%.
 return	
 
-q::
+Shift::
 	if (WinActive("ahk_class POEWindowClass")) {
-		Send {r}
+		Send {q}
+		Send {MButton}
 		Random, rand, 200, 500
 		Sleep %rand%
-		Send, ^w
+		Send {r}
 		Sleep %rand%
-		Send {MButton}
-		Send, ^q
 	}	
 return	
 
 	
 	stopFlasks() {
-		toggle := false
+		toggle := favwlse
 		GuiControlGet, Logs
 		GuiControl,, Logs, Sleeping...
 		if (Timer = Blocked) {
