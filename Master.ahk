@@ -59,7 +59,7 @@ global deckCount
 global chanceCount
 global prophCount
 global coorCount
-global timer
+global timer 	
 global flasks
 global mapFound = false
 global coorY
@@ -70,12 +70,14 @@ IniRead, GuiToggle, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
 IniRead, Logout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Logout
 IniRead, AutoLogout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, AutoLogout
 IniRead, SteelSkin, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, SteelSkin
+IniRead, YourHideout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, YourHideout
 
 ;___________________Init Hotkey_____________________
 Hotkey,%GuiToggle%,winToggle
 Hotkey,%Logout%,logoutCommand
 Hotkey,%AutoLogout%,autoLogout
 Hotkey,%SteelSkin%,steelSkin
+Hotkey,%YourHideout%,yourHideout
 
 
 ;________________ Set ahk icon______________
@@ -92,7 +94,7 @@ IfExist, %I_Background_01%
 	Gui,Add,Picture,x0 y0 w1280 h250,%I_Background_01%
 ;__________________GUI-LeagueIcon__________________
 I_LeagueIcon_01 = %A_ScriptDir%\data\LeagueIcon.jpg
-Gui,Add,Picture,x465 y10 w176 h235,%I_LeagueIcon_01%
+Gui,Add,Picture,x765 y10 w176 h235,%I_LeagueIcon_01%
 
 ;__________________GUI-Font_____________________
 Gui, Font, cWhite Bold s8
@@ -116,6 +118,11 @@ Gui,Add,Button,x190 y110 w40 h40 gSkillT,T
 ;__________________GUI-Hotkeys_____________________
 Gui,Add,Text,x250 y30 w60 h30 BackgroundTrans,Start Flask:
 Gui,Add,Hotkey,x340 y30 w120 h21,Hotkeys
+
+;__________________GUI-Hotkeys-Commands_____________________
+Gui,Add,Text,x500 y30 w80 h30 BackgroundTrans, YourHideout:
+IniRead, YourHideout, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, YourHideout
+Gui,Add,Hotkey,x600 y30 w120 h21 vyourHideout , %YourHideout%
 
 ;__________________GUI-GuiToggle_____________________
 Gui,Add,Text,x250 y60 w100 h13 BackgroundTrans,Open/Hide GUI
@@ -152,7 +159,7 @@ Gui,Add, Text,x250 y230 w150 h13 BackgroundTrans, Dx11 (x64) Client:
 Gui,Add, Checkbox, x380 y210 w13 h13 Checked%steam%
 Gui,Add, Checkbox, x380 y230 w13 h13 Checked%highBits%
 
-Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 400 " w" 650 " h" 250, PoE-AHK v1.1
+Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 600 " w" 950 " h" 250, PoE-AHK v1.1
 
 return
 
@@ -244,7 +251,7 @@ StopHK:
 	return
 
 winToggle:
-		Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 400 " w" 650 " h" 250, PoE-AHK v1.1
+		Gui, Show,% "x" A_ScreenWidth - 1200 " y" A_ScreenHeight - 600 " w" 950 " h" 250, PoE-AHK v1.1
 		guiToggle := false
 		return
 
@@ -357,6 +364,13 @@ return
 	}
 
 
+yourHideout:
+	Send {Enter}
+	Send /hideout
+	Send {Enter}
+return	
+
+
 steelSkin:
 	autoSteelSkin := !autoSteelSkin
 	msgbox, steelSkin =  %autoSteelSkin%
@@ -456,10 +470,29 @@ return
 
 	Save:
 	Gui, Submit, NoHide
+	IfExist, %A_ScriptDir%\save\Hotkeys.ini
+		FileDelete, %A_ScriptDir%\save\Hotkeys.ini
+	
 	GuiControlGet, GuiToggle
-	decks := GuiToggle
-	IniWrite, %decks%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
-	, %guiLogout%,  %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, logout
+	saveGuiToggle := GuiToggle
+	IniWrite, %saveGuiToggle%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, GuiToggle
+	
+	GuiControlGet, Logout
+	saveLogout := Logout
+	IniWrite, %saveLogout%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, Logout
+
+	GuiControlGet, AutoLogout
+	saveAutoLogout := AutoLogout
+	IniWrite, %saveAutoLogout%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, AutoLogout
+
+	GuiControlGet, SteelSkin
+	saveSteelSkin := SteelSkin
+	IniWrite, %saveSteelSkin%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, SteelSkin
+
+	GuiControlGet, YourHideout
+	saveYourHideout := YourHideout
+	IniWrite, %saveYourHideout%, %A_ScriptDir%\save\Hotkeys.ini, Hotkeys, YourHideout
+
 	MsgBox The new settings have been saved. Remember to restart the program.
 	return
 
