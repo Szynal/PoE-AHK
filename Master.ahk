@@ -90,7 +90,9 @@ guiToggle:= false
 I_Background_01 = %A_ScriptDir%\data\bd_01.png
 IfExist, %I_Background_01%
 	Gui,Add,Picture,x0 y0 w1280 h250,%I_Background_01%
-Gui,Add,Picture,x465 y10 w176 h235,C:\Users\szyna\Documents\AHK\AHK-Studio\Projects\data\egs-pathofexile-grindinggeargames-s2-1200x1600-32f2178d2f78.jpg
+;__________________GUI-LeagueIcon__________________
+I_LeagueIcon_01 = %A_ScriptDir%\data\LeagueIcon.jpg
+Gui,Add,Picture,x465 y10 w176 h235,%I_LeagueIcon_01%
 
 ;__________________GUI-Font_____________________
 Gui, Font, cWhite Bold s8
